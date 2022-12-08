@@ -1,1 +1,1 @@
-# paltzi-movies
+# platzi-movies
