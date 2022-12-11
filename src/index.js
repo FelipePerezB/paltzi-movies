@@ -15,11 +15,12 @@ const api = axios.create({
 
 const getMovies = async (page) => {
   const moviesContainer = document.querySelector(".movies" + page);
-  if (!moviesContainer.childElementCount < 2) {
+  if (moviesContainer.childElementCount < 2) {
     const { data } = await api("/trending/movie/day");
 
     const results =
       page === "Explore" ? filterGenres(data.results) : data.results;
+      createMovieCard(results, moviesContainer);
 
     if (page === "Home") {
       const bestMovie = results[0];
@@ -40,7 +41,6 @@ const getMovies = async (page) => {
       mainMovie.appendChild(mainImg);
     }
 
-    createMovieCard(results, moviesContainer);
   }
 };
 
@@ -143,10 +143,10 @@ const createMovieCard = (data, container, resetContainer) => {
   });
 };
 
-  const backButton = document.querySelector(".image .back-icon");
-  backButton.addEventListener("click", () => {
-    history.back();
-  });
+const backButton = document.querySelector(".image .back-icon");
+backButton.addEventListener("click", () => {
+  history.back();
+});
 
 const getMovie = async (id) => {
   const { data } = await api("movie/" + id);
@@ -154,17 +154,19 @@ const getMovie = async (id) => {
   const img = document.querySelector(".image img");
   const title = document.querySelector(".image .title");
   const description = document.querySelector(".MovieDetails p");
-  const subtitle = document.querySelector(".MovieDetails h2");
-  
+
   img.src = `https://image.tmdb.org/t/p/w300/${data.poster_path}`;
   title.innerText = data.title;
-  subtitle.innerText = "Description";
   description.innerText = data.overview;
-  window.scrollTo(0,0)
 };
 
 const getSimilarMovies = async (id) => {
   const { data } = await api(`movie/${id}/recommendations`);
   const container = document.querySelector(".moviesRecomendations");
   createMovieCard(data.results, container, true);
+  const subtitle = document.querySelector(".recomendations-subtitle");
+  subtitle.classList.remove("inactive");
+  if (data.total_results < 1) {
+    subtitle.classList.add("inactive");
+  }
 };

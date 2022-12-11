@@ -37,6 +37,7 @@ function navigator() {
     homePage();
     syncInputs("")
   }
+  window.scrollTo(0, 0);
 }
 
 function homePage() {
