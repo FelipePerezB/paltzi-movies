@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Platzi Movies</title>
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <nav>
+        <div class="logo">
+          <span class="logo-img"></span>
+          <span class="logo-text--active">Platzi</span>
+          <span class="logo-text">Movies</span>
+        </div>
+        <ul class="nav-items"></ul>
+        <article class="search-container">
+          <div class="search">
+            <!-- <input class="search-input" placeholder="Search movie..." />
+            <span id="search-logo" class="search-logo"></span> -->
+          </div>
+        </article>
+      </nav>
+
+      <section class="Home layout">
+        <article class="main-movie">
+          <div class="main-movie-shadow">
+            <span class="main-movie-title"></span>
+            <a>
+              <button class="button">Watch now!</button>
+            </a>
+          </div>
+        </article>
+
+        <article class="search-container">
+          <div class="search">
+            <!-- <input class="search-input" placeholder="Search movie..." />
+            <span id="search-logo" class="search-logo"></span> -->
+          </div>
+        </article>
+
+        <article class="new-movies">
+          <div class="new-movies-subtitle">
+            <h2>What's Popular?</h2>
+            <a href="#trends">View all</a>
+          </div>
+          <article class="lists-container">
+            <ul class="moviesHome"></ul>
+          </article>
+        </article>
+
+        <!-- <article class="genres-container">
+          <h2>Genres</h2>
+          <div class="lists-container genresHome genres"></div>
+        </article> -->
+      </section>
+
+      <!-- TRENDS PAGE -->
+      <section class="Trends layout">
+        <article>
+          <h2>Best movies</h2>
+          <div>
+            <div class="moviesTrends"></div>
+          </div>
+        </article>
+      </section>
+
+      <!-- EXPLORE PAGE -->
+      <section class="Explore">
+        <div class="query-container">
+          <article class="search-container">
+            <div class="search">
+              <!-- <input class="search-input" placeholder="Search movie..." />
+              <span class="search-logo"></span> -->
+            </div>
+          </article>
+
+          <article class="genres-container">
+            <div class="lists-container">
+              <div class="genresExplore genres"></div>
+            </div>
+          </article>
+        </div>
+        <article class="moviesExplore"></article>
+      </section>
+      <!-- SELECT MOVIE PAGE -->
+      <section class="MovieDetails">
+        <article class="image">
+          <picture class="img-container">
+            <span class="back-icon"></span>
+            <div class="shadow-back"></div>
+            <img />
+            <span class="title"></span>
+            <div class="shadow"></div>
+          </picture>
+        </article>
+        <article class="details">
+          <button class="button">Watch now!</button>
+          <h2 class="subtitle"></h2>
+          <p class="description"></p>
+          <h2>Recomendations</h2>
+          <div class="lists-container">
+            <ul class="moviesRecomendations"></ul>
+          </div>
+        </article>
+      </section>
+    </main>
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <script src="./src/index.js"></script>
+    <script type="module" src="./src/navigation.mjs"></script>
+  </body>
+</html>
