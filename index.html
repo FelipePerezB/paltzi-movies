@@ -28,7 +28,7 @@
         </article>
       </nav>
 
-      <section class="Home layout">
+      <section class="Home layout inactive">
         <article class="main-movie">
           <div class="main-movie-shadow">
             <span class="main-movie-title"></span>
@@ -46,26 +46,36 @@
         <article class="new-movies">
           <div class="new-movies-subtitle">
             <h2>What's Popular?</h2>
-            <a href="#trends">See more        </a>
+            <a href="#trends">See more</a>
           </div>
           <article class="lists-container">
-            <ul class="moviesHome"></ul>
+            <ul class="moviesHome movies"></ul>
           </article>
         </article>
       </section>
 
       <!-- TRENDS PAGE -->
-      <section class="Trends layout">
+      <section class="Trends layout inactive">
         <article>
           <h2>Trends!</h2>
-          <div>
-            <div class="moviesTrends"></div>
-          </div>
+          <ul class="moviesTrends movies"></ul>
+          <p page="Trends" class="end endTrends">Not more results found</p>
+          <!-- <div> -->
+            <!-- <article >
+              <p page = "Explore" class="end endExplore">Not more results found</p>
+            </article> -->
+            <!-- <div >
+
+
+            </div>
+            <div> -->
+            </div>
+          <!-- </div> -->
         </article>
       </section>
 
       <!-- EXPLORE PAGE -->
-      <section class="Explore">
+      <section class="Explore inactive">
         <div class="query-container">
           <article class="search-container">
             <div class="search">
@@ -78,10 +88,13 @@
             </div>
           </article>
         </div>
-        <article class="moviesExplore"></article>
+        <article >
+          <ul class="moviesExplore movies"></ul>
+          <p page = "Explore" class="end endExplore">Not more results found</p>
+        </article>
       </section>
       <!-- SELECT MOVIE PAGE -->
-      <section class="MovieDetails">
+      <section class="MovieDetails inactive">
         <article class="image">
           <picture class="img-container">
             <span class="back-icon"></span>
@@ -97,7 +110,7 @@
           <p class="description"></p>
           <h2 class="recomendations-subtitle">Recomendations</h2>
           <div class="lists-container">
-            <ul class="moviesRecomendations"></ul>
+            <ul class="moviesRecomendations movies"></ul>
           </div>
         </article>
       </section>
@@ -105,5 +118,6 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./src/index.js"></script>
     <script type="module" src="./src/navigation.mjs"></script>
+    <script src="./src/nodes.mjs"></script>
   </body>
 </html>
