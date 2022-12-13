@@ -5,6 +5,7 @@ const genres_query_results = [];
 let pageNumber = {};
 
 const lenguageSelect = document.querySelector("nav select");
+lenguageSelect.value= localStorage.getItem("lenguage")
 
 const api = axios.create({
   baseURL: "https://api.themoviedb.org/3/",
@@ -13,12 +14,13 @@ const api = axios.create({
   },
   params: {
     api_key: API_KEY,
-    language: "en",
+    language: localStorage.getItem("lenguage") ?? "en",
   },
 });
 
 lenguageSelect.addEventListener("change", () => {
-  api.defaults.params.language = lenguageSelect.value;
+  localStorage.setItem("lenguage", lenguageSelect.value)
+  location.reload()
 });
 
 const infScrollObserver = new IntersectionObserver((entries) => {
