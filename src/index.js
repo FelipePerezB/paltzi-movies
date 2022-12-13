@@ -5,7 +5,7 @@ const genres_query_results = [];
 let pageNumber = {};
 
 const lenguageSelect = document.querySelector("nav select");
-lenguageSelect.value= localStorage.getItem("lenguage")
+lenguageSelect.value = localStorage.getItem("lenguage");
 
 const api = axios.create({
   baseURL: "https://api.themoviedb.org/3/",
@@ -19,8 +19,8 @@ const api = axios.create({
 });
 
 lenguageSelect.addEventListener("change", () => {
-  localStorage.setItem("lenguage", lenguageSelect.value)
-  location.reload()
+  localStorage.setItem("lenguage", lenguageSelect.value);
+  location.reload();
 });
 
 const infScrollObserver = new IntersectionObserver((entries) => {
@@ -175,7 +175,7 @@ const getGenres = async (page) => {
         element.setAttribute("id", genre.id);
         element.addEventListener("click", () => {
           element.classList.toggle("genre-card--active");
-          if (element.classList[0] === "genre-card--active") {
+          if (element.classList.contains("genre-card--active")) {
             genres_query.push(Number(genre.id));
             window.scrollTo(0, 0);
             search(true);
@@ -309,9 +309,9 @@ const getMovie = async (id) => {
     addToFavoritesBtn.classList.remove("added");
   }
   addToFavoritesBtn.onclick = null;
-  addToFavoritesBtn.onclick = () =>{
+  addToFavoritesBtn.onclick = () => {
     createAddToFavBtn(data, addToFavoritesBtn, 2);
-  }
+  };
 
   img.src = `https://image.tmdb.org/t/p/original/${data.poster_path}`;
   title.innerText = data.title;
@@ -321,7 +321,7 @@ const getMovie = async (id) => {
 const createAddToFavBtn = (data, btnElement, classListNumber) => {
   btnElement.classList.toggle("added");
   console.log(btnElement);
-  if (btnElement.classList[classListNumber] === "added") {
+  if (btnElement.classList.contains("added")) {
     const storageData = localStorage.getItem("FavMovies") ?? "";
     const separation = storageData ? "---" : "";
     const newData =
@@ -332,16 +332,16 @@ const createAddToFavBtn = (data, btnElement, classListNumber) => {
   } else {
     const dataArray = localStorage.getItem("FavMovies")?.split("---");
     let dataIndex;
-    dataArray.forEach((e)=>{
+    dataArray.forEach((e) => {
       const elementArray = e.split("|||");
-      const id = elementArray[0]
-      if(id == data.id){
-        dataIndex= dataArray.indexOf(e)
+      const id = elementArray[0];
+      if (id == data.id) {
+        dataIndex = dataArray.indexOf(e);
       }
-    })
+    });
 
-    dataArray.splice(dataIndex,1)
-    localStorage.setItem("FavMovies", dataArray.join("---"))
+    dataArray.splice(dataIndex, 1);
+    localStorage.setItem("FavMovies", dataArray.join("---"));
   }
 };
 const getLikedMovies = () => {
@@ -363,7 +363,7 @@ const getLikedMovies = () => {
   if (data?.at(0)?.id) {
     createLoadingSkeletons(moviesFavsContainer, data.length, true);
     createMovieCard(data, moviesFavsContainer);
-  } else{
+  } else {
     favsMoviesContainer.classList.add("inactive");
   }
   // const data = dataString.map((e) => (e));
