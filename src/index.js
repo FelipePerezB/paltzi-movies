@@ -222,7 +222,7 @@ const searcInfObs = new IntersectionObserver(
     });
   },
   {
-    rootMargin: "5000px",
+    rootMargin: "50px",
   }
 );
 

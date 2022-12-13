@@ -473,7 +473,7 @@ nav .search-container {
 }
 
 .details .added::after{
-  content: "Delete to favorites";
+  content: "Remove from favorites";
 }
 
 .details .added:active{
