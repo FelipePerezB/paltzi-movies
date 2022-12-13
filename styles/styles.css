@@ -7,6 +7,11 @@
   display: none;
 }
 
+select{
+  background:#000513;
+  margin: 1rem;
+}
+
 .end{
   text-align: center;
 }

@@ -4,6 +4,8 @@ const genres_query = [];
 const genres_query_results = [];
 let pageNumber = {};
 
+const lenguageSelect = document.querySelector("nav select");
+
 const api = axios.create({
   baseURL: "https://api.themoviedb.org/3/",
   headers: {
@@ -13,6 +15,10 @@ const api = axios.create({
     api_key: API_KEY,
     language: "en",
   },
+});
+
+lenguageSelect.addEventListener("change", () => {
+  api.defaults.params.language = lenguageSelect.value;
 });
 
 const infScrollObserver = new IntersectionObserver((entries) => {
@@ -96,7 +102,7 @@ const createMovieCard = (data, container, number = 0) => {
       const a = element.childNodes[0];
       const img = a.childNodes[0];
 
-      if (localStorage.getItem(String(movie.id))) {
+      if (isInLocalStorage(movie.id)) {
         addToFavBtn.classList.add("added");
       }
       addToFavBtn.classList.add("fav-btn");
@@ -300,11 +306,10 @@ const getMovie = async (id) => {
   } else {
     addToFavoritesBtn.classList.remove("added");
   }
-
-
-  console.log({addToFavoritesBtn});
   addToFavoritesBtn.onclick = null;
-  addToFavoritesBtn.onclick = () => createAddToFavBtn(data, addToFavoritesBtn, 2);
+  addToFavoritesBtn.onclick = () =>{
+    createAddToFavBtn(data, addToFavoritesBtn, 2);
+  }
 
   img.src = `https://image.tmdb.org/t/p/original/${data.poster_path}`;
   title.innerText = data.title;
@@ -313,16 +318,53 @@ const getMovie = async (id) => {
 
 const createAddToFavBtn = (data, btnElement, classListNumber) => {
   btnElement.classList.toggle("added");
+  console.log(btnElement);
   if (btnElement.classList[classListNumber] === "added") {
-    console.log(data.id);
-    const movieData = {};
-    movieData["id"] = data.id;
-    movieData["title"] = data.title;
-    movieData["poster_path"] = data.poster_path;
-    localStorage.setItem(String(data.id), JSON.stringify(movieData));
+    const storageData = localStorage.getItem("FavMovies") ?? "";
+    const separation = storageData ? "---" : "";
+    const newData =
+      storageData +
+      separation +
+      `${data.id}|||${data.title}|||${data.poster_path}|||`;
+    localStorage.setItem("FavMovies", newData);
   } else {
-    localStorage.removeItem(String(data.id));
+    const dataArray = localStorage.getItem("FavMovies")?.split("---");
+    let dataIndex;
+    dataArray.forEach((e)=>{
+      const elementArray = e.split("|||");
+      const id = elementArray[0]
+      if(id == data.id){
+        dataIndex= dataArray.indexOf(e)
+      }
+    })
+
+    dataArray.splice(dataIndex,1)
+    localStorage.setItem("FavMovies", dataArray.join("---"))
   }
+};
+const getLikedMovies = () => {
+  const moviesFavsContainer = document.querySelector(".moviesFavs");
+  moviesFavsContainer.innerHTML = "";
+  const favsMoviesContainer = document.querySelector(".favs-movies");
+  favsMoviesContainer.classList.remove("inactive");
+
+  const dataArray = localStorage.getItem("FavMovies")?.split("---");
+  const data = dataArray?.map((element) => {
+    const elementArray = element.split("|||");
+    return {
+      id: elementArray[0],
+      title: elementArray[1],
+      poster_path: elementArray[2],
+    };
+  });
+  console.log(data);
+  if (data?.at(0)?.id) {
+    createLoadingSkeletons(moviesFavsContainer, data.length, true);
+    createMovieCard(data, moviesFavsContainer);
+  } else{
+    favsMoviesContainer.classList.add("inactive");
+  }
+  // const data = dataString.map((e) => (e));
 };
 
 const getSimilarMovies = async (id) => {
@@ -340,31 +382,18 @@ const getSimilarMovies = async (id) => {
   }
 };
 
-const getLikedMovies = () => {
-  const moviesFavsContainer = document.querySelector(".moviesFavs");
-  moviesFavsContainer.innerHTML = "";
-  const favsMoviesContainer = document.querySelector(".favs-movies");
-  // trendsHomeMovies.innerHTML=""
-  // getMovies("Home");
-
-  favsMoviesContainer.classList.remove("inactive");
-
-  if (localStorage.length < 1) {
-    favsMoviesContainer.classList.add("inactive");
-  }
-
-  const dataString = Object.values(localStorage);
-  const data = dataString.map((e) => JSON.parse(e));
-
-  createLoadingSkeletons(moviesFavsContainer, localStorage.length);
-  createMovieCard(data, moviesFavsContainer);
-};
-
 const isInLocalStorage = (id) => {
-  const dataString = Object.values(localStorage);
-  const data = dataString.map((e) => JSON.parse(e));
+  const dataArray = localStorage.getItem("FavMovies")?.split("---");
+  const data = dataArray?.map((element) => {
+    const elementArray = element.split("|||");
+    return {
+      id: elementArray[0],
+      title: elementArray[1],
+      poster_path: elementArray[2],
+    };
+  });
   let bool = false;
-  data.forEach((e) => {
+  data?.forEach((e) => {
     if (e.id == id) {
       bool = true;
     }
