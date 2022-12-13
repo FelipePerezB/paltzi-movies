@@ -50,8 +50,8 @@ async function homePage() {
       page[1].classList.remove("inactive");
     }
   });
-  await getMovies("Home");
-  // getGenres("Home");
+  getMovies("Home");
+  getLikedMovies();
 }
 
 function explorePage() {

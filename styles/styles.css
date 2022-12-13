@@ -237,20 +237,21 @@ nav .search-container {
   background: url("../assets/icons/search.svg") no-repeat;
 }
 
-.new-movies-subtitle {
+.home-subtitle-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
 }
 
-.new-movies-subtitle h2 {
+.home-subtitle-container h2 {
   margin: 0;
   padding: 0;
 }
 
 .moviesHome,
-.moviesRecomendations {
+.moviesRecomendations,
+.moviesFavs {
   width: max-content;
   display: flex;
   overflow: hidden;
@@ -264,6 +265,7 @@ nav .search-container {
 }
 
 .movie-card {
+  position: relative;
   display: flex;
   cursor: pointer;
   padding: 0 0 1rem;
@@ -280,7 +282,52 @@ nav .search-container {
   background-color:#040b1f99;
 }
 
+.movie-card .shadow{
+  opacity: 0;
+  width: 200%;
+  height: 5rem;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 5, 18, 0.856) 1%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  position: absolute;
+  top: -10px;
+  transition: all .8s;
+}
+
+
+.fav-btn{
+  position: absolute;
+  cursor: pointer;
+  opacity: 0;
+  transition: all .8s;
+  background: url(../assets/icons/heart.svg) no-repeat center;
+  transform: scale(0.8);
+  border: none;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 0;
+  height: 3rem;
+  width: 3rem;
+}
+
+.movie-card .added{
+  background: url(../assets/icons/heart-remove.svg) no-repeat center;
+}
+.movie-card:hover .fav-btn{
+  opacity: 1;
+  transition: all .4s;
+}
+
+.movie-card:hover .shadow{
+  opacity: 1;
+  transition: all .2s;
+}
+
+
 .movie-card a{
+  position: relative;
   height: 100%;
 }
 
@@ -338,6 +385,7 @@ nav .search-container {
   display: flex;
   padding: 1rem;
   gap: 1rem;
+  z-index: 1000;
   flex-direction: column;
   position: fixed;
   background-color: #000513;
@@ -367,7 +415,7 @@ nav .search-container {
   z-index: 100;
   cursor: pointer;
   position: fixed;
-  transform: scale(0.8);
+  transform: scale(0.7);
   top: 1.4rem;
   left: 1.4rem;
   display: inline-block;
@@ -380,7 +428,7 @@ nav .search-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.6rem;
   padding: 50vh 1rem 2rem;
 }
 
@@ -393,11 +441,43 @@ nav .search-container {
   margin: 0;
 }
 
+.buttons{
+  margin: 1.8rem 0;
+  flex-direction: column;
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.details .favButton{
+  background-color: #87dc87;
+}
+
+.details .favButton::after{
+  content: "Add to favorites";
+}
+
+.details .favButton:active{
+  background-color: #599359;
+}
+
+.details .added{
+  background-color: red;
+}
+
+.details .added::after{
+  content: "Delete to favorites";
+}
+
+.details .added:active{
+  background-color: rgb(168, 0, 0);
+}
+
 .MovieDetails .button {
   height: 2.5rem;
   max-width: 20rem;
   width: 100%;
-  margin: 0.4rem auto;
 }
 
 .img-container {
@@ -459,6 +539,9 @@ nav .search-container {
   .main-movie-shadow {
     height: 40%;
     gap: 15%;
+  }
+  .buttons{
+    flex-direction:row;
   }
 }
 

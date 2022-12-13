@@ -12,6 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"
       rel="stylesheet"
     />
+    <link rel="shortcut icon" href="assets/icons/PlatziMovies.svg" />
   </head>
   <body>
     <main>
@@ -23,34 +24,40 @@
         </div>
         <ul class="nav-items"></ul>
         <article class="search-container">
-          <div class="search">
-          </div>
+          <div class="search"></div>
         </article>
       </nav>
-
+      <!-- HOME -->
       <section class="Home layout inactive">
         <article class="main-movie">
           <div class="main-movie-shadow">
             <span class="main-movie-title"></span>
-            <a>
-              <button class="button">Watch now!</button>
-            </a>
+            <button class="button">Watch now!</button>
           </div>
         </article>
 
         <article class="search-container">
-          <div class="search">
-          </div>
+          <div class="search"></div>
         </article>
 
         <article class="new-movies">
-          <div class="new-movies-subtitle">
+          <div class="home-subtitle-container">
             <h2>What's Popular?</h2>
             <a href="#trends">See more</a>
           </div>
-          <article class="lists-container">
+          <div class="lists-container">
             <ul class="moviesHome movies"></ul>
-          </article>
+          </div>
+        </article>
+
+        <article class="favs-movies">
+          <div class="home-subtitle-container">
+            <h2>Liked movies</h2>
+            <!-- <a href="#trends">See more</a> -->
+          </div>
+          <div class="lists-container">
+            <ul class="moviesFavs movies"></ul>
+          </div>
         </article>
       </section>
 
@@ -61,15 +68,15 @@
           <ul class="moviesTrends movies"></ul>
           <p page="Trends" class="end endTrends">Not more results found</p>
           <!-- <div> -->
-            <!-- <article >
+          <!-- <article >
               <p page = "Explore" class="end endExplore">Not more results found</p>
             </article> -->
-            <!-- <div >
+          <!-- <div >
 
 
             </div>
             <div> -->
-            </div>
+          <!-- </div> -->
           <!-- </div> -->
         </article>
       </section>
@@ -78,8 +85,7 @@
       <section class="Explore inactive">
         <div class="query-container">
           <article class="search-container">
-            <div class="search">
-            </div>
+            <div class="search"></div>
           </article>
 
           <article class="genres-container">
@@ -88,9 +94,9 @@
             </div>
           </article>
         </div>
-        <article >
+        <article>
           <ul class="moviesExplore movies"></ul>
-          <p page = "Explore" class="end endExplore">Not more results found</p>
+          <p page="Explore" class="end endExplore">Not more results found</p>
         </article>
       </section>
       <!-- SELECT MOVIE PAGE -->
@@ -105,7 +111,10 @@
           </picture>
         </article>
         <article class="details">
-          <button class="button">Watch now!</button>
+          <div class="buttons">
+            <button class="button">Watch now!</button>
+            <button class="favButton button"></button>
+          </div>
           <h2 class="subtitle">Description</h2>
           <p class="description"></p>
           <h2 class="recomendations-subtitle">Recomendations</h2>
