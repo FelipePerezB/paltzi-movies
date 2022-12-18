@@ -9,5 +9,3 @@ const nodes = {
     MovieDetails: getTag(".MovieDetails"),
   }
 };
-
-// export default nodes;

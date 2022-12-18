@@ -318,9 +318,8 @@ const getMovie = async (id) => {
   description.innerText = data.overview;
 };
 
-const createAddToFavBtn = (data, btnElement, classListNumber) => {
+const createAddToFavBtn = (data, btnElement) => {
   btnElement.classList.toggle("added");
-  console.log(btnElement);
   if (btnElement.classList.contains("added")) {
     const storageData = localStorage.getItem("FavMovies") ?? "";
     const separation = storageData ? "---" : "";
